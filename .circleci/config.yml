@@ -24,9 +24,6 @@ jobs:
     steps:
       - checkout
       - run:
-          name: "change working directory" 
-          command: "cd test-app"
-      - run:
           name: "build go binary"
           command: "ls -all & pwd & CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build ./cmd/ops-test-app"
           working_directory: ${WORKSPACE}/test-app
