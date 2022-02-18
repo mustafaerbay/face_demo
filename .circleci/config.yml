@@ -19,9 +19,10 @@ jobs:
           name: "Say hello"
           command: "echo Hello, World!"
   example-job:
+    working_directory: ~/test-app
     docker:
       # replace with your preferred image
-      - image: cimg/base:stable
+      - image: circleci/golang
     steps:
       - go/mod-download-cached
 # Invoke jobs via workflows
