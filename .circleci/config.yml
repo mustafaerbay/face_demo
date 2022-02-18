@@ -70,9 +70,14 @@ jobs:
           paths:
             - .
 workflows:
-  say-hello-workflow:
+  build-deploy:
     jobs:
-      - build
+      - build:
+          filters:
+            branches:
+              ignore:
+                - develop
+                - /feature-.*/
       - test:
           requires:
             - build
