@@ -41,7 +41,7 @@ jobs:
           working_directory: ./test-app
       - run:
           name: "netstat -tulpn"
-          command: "netstat -tulpn ; ipaddr show"
+          command: "netstat -tulpn ; docker ps"
           working_directory: ./test-app
       - run:
           name: "test docker image"
