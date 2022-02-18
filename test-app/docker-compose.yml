@@ -7,7 +7,6 @@ services:
     network_mode: host
     build:
       context: .
-      dockerfile: .
       args:
         VERSION: ${TAG}
     environment:
