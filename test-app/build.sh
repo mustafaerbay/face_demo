@@ -30,24 +30,24 @@ ls -all
 
 
  echo_info() {
-    local date_now=$(date "+%Y-%m-%d %H:%M:%S")
+    date_now=$(date "+%Y-%m-%d %H:%M:%S")
     echo -e "\e\033[32m"[INFO]----[${date_now}] --------------$1--------------$"\033[0m"
 }
 
  echo_error() {
-    local date_now=$(date "+%Y-%m-%d %H:%M:%S:%N")
+    date_now=$(date "+%Y-%m-%d %H:%M:%S:%N")
     echo -e "\e\033[31m"[ERROR]----[${date_now}] --------------$1--------------$"\033[0m"
 }
 
  echo_debug() {
-    local date_now=$(date "+%Y-%m-%d %H:%M:%S:%N")
+    date_now=$(date "+%Y-%m-%d %H:%M:%S:%N")
     echo -e "\e\033[33m"[DEBUG]----[${date_now}] --------------$1--------------$"\033[0m"
 }
 
  is_exist_app() {
     echo_debug " $FUNCNAME is starting... with arguments  $@"
-    local app=$1
-    command -v $app >/dev/null 2>&1 || { echo_error >&2 "Require ${app} but it's not installed.  Aborting."; exit 1; }
+    app=${1}
+    command -v ${app} >/dev/null 2>&1 || { echo_error >&2 "Require ${app} but it's not installed.  Aborting."; exit 1; }
 }
 
 if command -v git > /dev/null; then
