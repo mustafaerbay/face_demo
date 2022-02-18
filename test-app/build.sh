@@ -106,7 +106,9 @@ test_package() {
     # docker run --rm --name=postrgres -p 5432:5432 -e POSTGRES_PASSWORD=mysecretpassword -d postgres:13-alpine
 
     # docker run -it --name=${APP_NAME}_${TAG} -d
-    docker-compose up -d
+    docker-compose up postgres -d
+    sleep 10
+    docker-compose up faceit -d
     check_health
 
     echo_info "TESTED VERSION:${TAG}"
