@@ -1,7 +1,7 @@
 #!/bin/bash
 
 TAG=0.1.$CIRCLE_BUILD_NUM
-docker build -t CircleCI-Public/circleci-demo-docker:$TAG .
+docker build -t circleci-demo-docker:$TAG .
 echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
 docker push CircleCI-Public/circleci-demo-docker:$TAG
 
