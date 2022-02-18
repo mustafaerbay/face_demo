@@ -39,7 +39,15 @@ jobs:
       # build and push Docker image
       - run:
           name: "docker image build"
-          command: "sh build.sh"
+          command: "sh build.sh image_build"
+          working_directory: ./test-app
+      - run:
+          name: "test built image"
+          command: "sh build.sh test_package"
+          working_directory: ./test-app
+      - run:
+          name: "docker image build"
+          command: "sh build.sh image_push"
           working_directory: ./test-app
         #working_directory: ./test-app
 # Invoke jobs via workflows
