@@ -29,22 +29,22 @@ CURDIR="$(pwd)"
 ls -all
 
 
- echo_info() {
+echo_info() {
     date_now=$(date "+%Y-%m-%d %H:%M:%S")
     echo -e "\e\033[32m"[INFO]----[${date_now}] --------------$1--------------$"\033[0m"
 }
 
- echo_error() {
+echo_error() {
     date_now=$(date "+%Y-%m-%d %H:%M:%S:%N")
     echo -e "\e\033[31m"[ERROR]----[${date_now}] --------------$1--------------$"\033[0m"
 }
 
- echo_debug() {
+echo_debug() {
     date_now=$(date "+%Y-%m-%d %H:%M:%S:%N")
     echo -e "\e\033[33m"[DEBUG]----[${date_now}] --------------$1--------------$"\033[0m"
 }
 
- is_exist_app() {
+is_exist_app() {
     echo_debug " $FUNCNAME is starting... with arguments  $@"
     app=${1}
     command -v ${app} >/dev/null 2>&1 || { echo_error >&2 "Require ${app} but it's not installed.  Aborting."; exit 1; }
@@ -56,7 +56,7 @@ if command -v git > /dev/null; then
     BUILD_TIMESTAMP=$(date '+%Y-%m-%dT%H:%M:%S')
 fi
 
-TAG=0.1.${CIRCLE_BUILD_NUM:-"$COMMIT_HASH"}
+export TAG=0.1.${CIRCLE_BUILD_NUM:-"$COMMIT_HASH"}
 
 
 
@@ -71,7 +71,7 @@ usage() {
 
     '
 }
- check_health() {
+check_health() {
     is_exist_app curl
     curl -v http://localhost:8080/health
     if [[ $? != 0 ]]; then
@@ -80,27 +80,29 @@ usage() {
     fi
 }
 
- docker_image_build() {
+docker_image_build() {
     echo_info "Docker image build started"
     ls | grep "Dockerfile"
     if [ $? != "0" ]; then
         echo "Dockerfile not exist in ${CURDIR}"
         exit 1
     fi
-    docker build -t ${APP_NAME}:${TAG} --build-arg VERSION=${TAG} -f Dockerfile
+    docker-compose build --no-cache
+    # docker build -t ${APP_NAME}:${TAG} --build-arg VERSION=${TAG} -f Dockerfile
 }
 
- docker_image_push() {
+docker_image_push() {
     echo_info "Docker image push to registry"
     echo ${DOCKER_PASS} | docker login -u ${DOCKER_USER} --password-stdin
-    docker push ${APP_NAME}:${TAG}
+    docker push anatolman/${APP_NAME}:${TAG}
 }
 
- test_package() {
+test_package() {
     echo_info "Postgresql and app container starting"
-    docker run --rm --name=postrgres -p 5432:5432 -e POSTGRES_PASSWORD=mysecretpassword -d postgres:13-alpine
+    # docker run --rm --name=postrgres -p 5432:5432 -e POSTGRES_PASSWORD=mysecretpassword -d postgres:13-alpine
 
-    docker run -it --name=${APP_NAME}_${TAG} -d
+    # docker run -it --name=${APP_NAME}_${TAG} -d
+    docker-compose up -d
     check_health
 
     echo_info "TESTED VERSION:${TAG}"
