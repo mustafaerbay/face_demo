@@ -19,11 +19,12 @@ jobs:
           name: "Say hello"
           command: "echo Hello, World!"
   example-job:
-    working_directory: ~/test-app
+    # working_directory: ~/test-app
     docker:
       # replace with your preferred image
       - image: circleci/golang
     steps:
+      
       - run:
           command: "ls -all"
       - go/mod-download-cached
