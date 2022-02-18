@@ -97,6 +97,7 @@ docker_image_build() {
 
 docker_image_push() {
     echo_info "Docker image push to registry"
+    docker-compose build
     echo ${DOCKER_PASS} | docker login -u ${DOCKER_USER} --password-stdin
     docker push anatolman/${APP_NAME}:${TAG}
 }
