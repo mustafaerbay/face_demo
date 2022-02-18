@@ -1,4 +1,7 @@
 #!/bin/bash
+set -ex
+
+ls -all
 
 TAG=0.1.$CIRCLE_BUILD_NUM
 docker build -t circleci-demo-docker:$TAG .
