@@ -21,15 +21,14 @@ jobs:
           paths:
             - .
   test:
-    docker:
-      # replace with your preferred image
-      - image: cimg/go:1.17
+    machine: # executor type
+      image: ubuntu-2004:202010-01
     steps:
       - attach_workspace:
           at: .
-      - setup_remote_docker:
-          version: 19.03.13
-          docker_layer_caching: true
+      # - setup_remote_docker:
+      #     version: 19.03.13
+      #     docker_layer_caching: true
       - run:
           name: run docker version"
           command: "ls -all; docker version"
@@ -52,9 +51,8 @@ jobs:
           paths:
             - .
   push:
-    docker:
-      # replace with your preferred image
-      - image: cimg/go:1.17
+    machine: # executor type
+      image: ubuntu-2004:202010-01
     steps:
       - attach_workspace:
           at: .
