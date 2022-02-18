@@ -16,7 +16,7 @@ jobs:
   #     - run:
   #         name: "Say hello"
   #         command: "echo Hello, World!"
-  example-job:
+  build:
     # working_directory: ${WORKSPACE}/test-app
     docker:
       # replace with your preferred image
@@ -28,7 +28,14 @@ jobs:
           # command: "cd test-app ; ls -all & pwd & CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build ./cmd/ops-test-app"
           command: "CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build ./cmd/ops-test-app"
           working_directory: ./test-app
-
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
+  test:
+    steps:
+      - attach_workspace:
+          at: .
       - setup_remote_docker:
           version: 19.03.13
           docker_layer_caching: true
@@ -45,15 +52,30 @@ jobs:
           name: "test built image"
           command: "sh build.sh test_package"
           working_directory: ./test-app
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
+  push:
+    steps:
+      - attach_workspace:
+          at: .
       - run:
           name: "docker image build"
           command: "sh build.sh image_push"
           working_directory: ./test-app
         #working_directory: ./test-app
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
+
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
   say-hello-workflow:
     jobs:
       # - say-hello
-      - example-job
+      - build
+      - test
+      - push

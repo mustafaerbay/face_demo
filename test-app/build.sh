@@ -1,5 +1,5 @@
 #!/bin/bash
-#set -ex
+set -ex
 
 # docker build -t circleci-demo-docker:$TAG .
 # echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
