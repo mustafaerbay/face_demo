@@ -17,6 +17,8 @@ services:
     - POSTGRESQL_DBNAME=postgres
     ports:
       - '8080:8080'
+    depends_on:
+      - postgres
   postgres:
     image: postgres:13-alpine
     container_name: postrgres
