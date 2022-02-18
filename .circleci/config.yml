@@ -63,13 +63,13 @@ jobs:
           root: .
           paths:
             - .
-
-# Invoke jobs via workflows
-# See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
   say-hello-workflow:
     jobs:
-      # - say-hello
       - build
-      - test
-      - push
+      - test:
+          requires:
+            - build
+      - push:
+          requires:
+            - test
