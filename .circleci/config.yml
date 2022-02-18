@@ -20,12 +20,12 @@ jobs:
     # working_directory: ${WORKSPACE}/test-app
     docker:
       # replace with your preferred image
-      - image: cimg/base:stable
+      - image: cimg/go:1.17
     steps:
       - checkout
       - run:
           command: "cd test-app"
-      - go/install
+      - run: go version
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
