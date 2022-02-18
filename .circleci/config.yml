@@ -28,6 +28,21 @@ jobs:
           # command: "cd test-app ; ls -all & pwd & CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build ./cmd/ops-test-app"
           command: "CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build ./cmd/ops-test-app"
           working_directory: ./test-app
+      - run:
+          name: run docker command"
+          command: "docker version"
+          working_directory: ./test-app
+
+      - setup_remote_docker:
+          version: 19.03.13
+          docker_layer_caching: true
+
+      # build and push Docker image
+      - run:
+          name: "docker image build"
+          command: "sh build.sh"
+
+        #working_directory: ./test-app
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
