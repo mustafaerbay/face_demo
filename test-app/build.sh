@@ -73,6 +73,7 @@ usage() {
 }
 check_health() {
     is_exist_app curl
+    docker ps -a
     IP_ADDR=$(/sbin/ifconfig -a | grep inet | grep -v 127.0.0.1 | grep -v inet6 | awk '{print $2}' | head -1 | tr -d "addr:")
     curl -v http://${IP_ADDR}:8080/health
     if [[ $? != 0 ]]; then
