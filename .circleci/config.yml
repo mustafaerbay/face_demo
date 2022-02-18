@@ -40,11 +40,15 @@ jobs:
           working_directory: ./test-app
       - run:
           name: "netstat -tulpn"
-          command: "netstat -tulpn ; docker ps"
+          command: "docker ps"
           working_directory: ./test-app
       - run:
           name: "test docker image"
           command: "sh build.sh test_package"
+          working_directory: ./test-app
+      - run:
+          name: "test docker image"
+          command: "docker ps"
           working_directory: ./test-app
       - persist_to_workspace:
           root: .
