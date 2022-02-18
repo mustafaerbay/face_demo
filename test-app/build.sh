@@ -29,23 +29,23 @@ CURDIR="$(pwd)"
 ls -all
 
 
-function echo_info() {
+ echo_info() {
     local date_now=$(date "+%Y-%m-%d %H:%M:%S")
     echo -e "\e\033[32m"[INFO]----[${date_now}] --------------$1--------------$"\033[0m"
 }
 
-function echo_error() {
+ echo_error() {
     local date_now=$(date "+%Y-%m-%d %H:%M:%S:%N")
     echo -e "\e\033[31m"[ERROR]----[${date_now}] --------------$1--------------$"\033[0m"
 }
 
-function echo_debug() {
+ echo_debug() {
     local date_now=$(date "+%Y-%m-%d %H:%M:%S:%N")
     echo -e "\e\033[33m"[DEBUG]----[${date_now}] --------------$1--------------$"\033[0m"
 }
 
-function is_exist_app() {
-    echo_debug "Function $FUNCNAME is starting... with arguments  $@"
+ is_exist_app() {
+    echo_debug " $FUNCNAME is starting... with arguments  $@"
     local app=$1
     command -v $app >/dev/null 2>&1 || { echo_error >&2 "Require ${app} but it's not installed.  Aborting."; exit 1; }
 }
@@ -71,7 +71,7 @@ usage() {
 
     '
 }
-function check_health() {
+ check_health() {
     is_exist_app curl
     curl -v http://localhost:8080/health
     if [[ $? != 0 ]]; then
@@ -80,7 +80,7 @@ function check_health() {
     fi
 }
 
-function docker_image_build() {
+ docker_image_build() {
     echo_info "Docker image build started"
     ls | grep "Dockerfile"
     if [ $? != "0" ]; then
@@ -90,13 +90,13 @@ function docker_image_build() {
     docker build -t ${APP_NAME}:${TAG} --build-arg VERSION=${TAG} -f Dockerfile
 }
 
-function docker_image_push() {
+ docker_image_push() {
     echo_info "Docker image push to registry"
     echo ${DOCKER_PASS} | docker login -u ${DOCKER_USER} --password-stdin
     docker push ${APP_NAME}:${TAG}
 }
 
-function test_package() {
+ test_package() {
     echo_info "Postgresql and app container starting"
     docker run --rm --name=postrgres -p 5432:5432 -e POSTGRES_PASSWORD=mysecretpassword -d postgres:13-alpine
 
