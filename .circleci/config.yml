@@ -20,7 +20,7 @@ jobs:
     # working_directory: ${WORKSPACE}/test-app
     docker:
       # replace with your preferred image
-      - image: circleci/golang:1.17-stretch-node-browsers
+      - image: cimg/base:stable
     steps:
       - checkout
       - run:
