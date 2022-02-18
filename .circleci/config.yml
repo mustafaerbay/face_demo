@@ -25,7 +25,7 @@ jobs:
       - checkout
       - run:
           name: "build go binary"
-          command: "cd test-app & ls -all & pwd & CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build ./cmd/ops-test-app"
+          command: "cd test-app ; ls -all & pwd & CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build ./cmd/ops-test-app"
       - run:
           name: "check tree"
           command: "tree ."
