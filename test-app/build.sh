@@ -124,3 +124,5 @@ main() {
         ;;
     esac
 }
+
+main
