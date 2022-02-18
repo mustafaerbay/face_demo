@@ -30,8 +30,8 @@ jobs:
       #     version: 19.03.13
       #     docker_layer_caching: true
       - run:
-          name: run docker version"
-          command: "ls -all; docker version"
+          name: install net-tools"
+          command: "sudo apt install net-tools"
           working_directory: ./test-app
       # build and push Docker image
       - run:
@@ -47,7 +47,7 @@ jobs:
           command: "sh build.sh test_package"
           working_directory: ./test-app
       - run:
-          name: "test docker image"
+          name: "docker ps"
           command: "docker ps"
           working_directory: ./test-app
       - persist_to_workspace:
