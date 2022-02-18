@@ -112,13 +112,13 @@ test_package() {
 
 main() {
     case ${option} in
-    image_build)
+    docker_image_build)
         docker_image_build
         ;;
-    image_push)
+    docker_image_push)
         docker_image_push
         ;;
-    test)
+    test_package)
         test_package
         ;;
     *)

@@ -37,10 +37,10 @@ jobs:
       # build and push Docker image
       - run:
           name: "docker image build"
-          command: "ls -all ; sh build.sh image_build"
+          command: "ls -all ; sh build.sh docker_image_build"
           working_directory: ./test-app
       - run:
-          name: "test built image"
+          name: "test docker image"
           command: "sh build.sh test_package"
           working_directory: ./test-app
       - persist_to_workspace:
@@ -56,7 +56,7 @@ jobs:
           at: .
       - run:
           name: "docker image build"
-          command: "sh build.sh image_push"
+          command: "sh build.sh docker_image_push"
           working_directory: ./test-app
         #working_directory: ./test-app
       - persist_to_workspace:
