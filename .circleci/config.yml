@@ -24,7 +24,7 @@ jobs:
       # replace with your preferred image
       - image: circleci/golang
     steps:
-      
+      - checkout
       - run:
           command: "ls -all"
       - go/mod-download-cached
