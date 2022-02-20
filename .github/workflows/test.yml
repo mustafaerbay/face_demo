@@ -44,5 +44,7 @@ jobs:
           # The hostname used to communicate with the PostgreSQL service container
           POSTGRESQL_HOST: postgres
           # The default PostgreSQL port
-      - name: Check backend go code
-        run: curl -v http://localhost:8080/health
+      - name: curl backend go code
+        uses: wei/curl@master
+        with:
+          args: http://localhost:8080/health
