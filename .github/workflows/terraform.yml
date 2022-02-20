@@ -100,8 +100,16 @@ jobs:
 
       - name: Terraform Plan
         if: github.event_name == 'push'
-        run: terraform plan --detailed-exitcode -no-color
+        run: terraform plan --detailed-exitcode -no-color -out=apply_push.pln
 
       - name: Terraform Apply
         if: github.event_name == 'push'
-        run: terraform apply --auto-approve
+        run: terraform apply --auto-approve apply_push.pln
+
+      - name: Terraform Plan destroy
+        if: github.event_name == 'push'
+        run: terraform plan --detailed-exitcode -no-color -out=destroy.pln
+
+      - name: Terraform Apply destroy
+        if: github.event_name == 'push'
+        run: terraform apply --auto-approve destroy.pln
