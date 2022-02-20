@@ -10,12 +10,43 @@ on:
       - main
   pull_request:
   workflow_dispatch:
+  
+  workflow_call:
+    inputs:
+      username:
+        description: 'A username passed from the caller workflow'
+        default: 'mustafa erbay'
+        required: false
+        type: string
 jobs:
+  print-username:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print the input name to STDOUT
+        run: echo The username is ${{ inputs.username }}
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        go: [ '1.17' ]
+    name: Go ${{ matrix.go }} sample
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup go
+        uses: actions/setup-go@v2
+        with:
+          go-version: ${{ matrix.go }}
+
+      - name: Check out source code
+        uses: actions/checkout@v2
+      
+      - name: Build
+        run: CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build ./cmd/ops-test-app
+
   terraform:
     name: Terraform
     runs-on: ubuntu-latest
     env:
-# Unresolved directive in pipelines_github.adoc - include::partial$variables-{ci-variables}-github.adoc[]
       TF_ROOT: terraform/dev
     defaults:
       run:
