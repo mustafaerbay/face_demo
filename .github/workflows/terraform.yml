@@ -1,4 +1,8 @@
 ---
+permissions:
+  id-token: write # required to use OIDC authentication
+  contents: read # required to checkout the code from the repo
+
 name: 'Terraform'
 on:
   push:
@@ -24,11 +28,11 @@ jobs:
         uses: hashicorp/setup-terraform@v1
         with:
           terraform_version: 0.14.10
-      - name: "Configure AWS Credentials" 
+      - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          role-to-assume: arn:aws:iam::352898041397:role/github_actions_test
+          role-duration-seconds: 900
           aws-region: us-west-2
 
       - name: Terraform Format
@@ -87,9 +91,10 @@ jobs:
         if: github.event_name == 'push'
         run: |
           mkdir -p ${{ github.workspace }}/bin
-          curl -o ${{ github.workspace }}/bin/aws-iam-authenticator https://amazon-eks.s3.us-west-2.amazonaws.com/1.19.6/2021-01-05/bin/linux/amd64/aws-iam-authenticator
+          curl -o ${{ github.workspace }}/bin/aws-iam-authenticator https://amazon-eks.s3.us-west-2.amazonaws.com/1.21.2/2021-07-05/bin/linux/amd64/aws-iam-authenticator
           chmod +x ${{ github.workspace }}/bin/aws-iam-authenticator
           echo "PATH=${{ github.workspace }}/bin:$PATH" >> $GITHUB_ENV
+          aws-iam-authenticator help
 
       - name: Terraform Plan
         if: github.event_name == 'push'
