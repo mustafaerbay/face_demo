@@ -94,6 +94,8 @@ jobs:
           curl -o ${{ github.workspace }}/bin/aws-iam-authenticator https://amazon-eks.s3.us-west-2.amazonaws.com/1.21.2/2021-07-05/bin/linux/amd64/aws-iam-authenticator
           chmod +x ${{ github.workspace }}/bin/aws-iam-authenticator
           echo "PATH=${{ github.workspace }}/bin:$PATH" >> $GITHUB_ENV
+          export PATH=${{ github.workspace }}/bin
+          echo "export PATH=$PATH:${{ github.workspace }}/bin" >> ~/.bashrc
           aws-iam-authenticator help
 
       - name: Terraform Plan
