@@ -38,9 +38,11 @@ jobs:
         working-directory: ./test-app
         # Runs a script that creates a PostgreSQL table, populates
         # the table with data, and then retrieves the data.
-        run: go run cmd/ops-test-app/main.go
+        run: go run cmd/ops-test-app/main.go &
         # Environment variables used by the `client.js` script to create a new PostgreSQL table.
         env:
           # The hostname used to communicate with the PostgreSQL service container
           POSTGRESQL_HOST: postgres
           # The default PostgreSQL port
+      - name: Check backend go code
+        run: curl -v http://localhost:8080/health
