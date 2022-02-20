@@ -34,8 +34,8 @@ resource "aws_default_subnet" "default_az2" {
   }
 }
 
-resource "aws_security_group" "backend_db" {
-  name        = "backend_db"
+resource "aws_security_group" "faceit" {
+  name        = "faceit"
   description = "Allow standart http and https ports inbound and everything outbound"
 
   ingress {
@@ -62,10 +62,10 @@ resource "aws_security_group" "backend_db" {
     "Prod" : "false"
   }
 }
-resource "aws_elb" "backend_db" {
-  name            = "backend-db"
+resource "aws_elb" "faceit" {
+  name            = "faceit"
   subnets         = [aws_default_subnet.default_az1.id, aws_default_subnet.default_az2.id]
-  security_groups = [aws_security_group.backend_db.id]
+  security_groups = [aws_security_group.faceit.id]
 
   listener {
     instance_port     = 8080
@@ -80,7 +80,7 @@ resource "aws_elb" "backend_db" {
 }
 
 #Amazon ECS-Optimized Amazon Linux 2 AMI
-resource "aws_launch_template" "backend_db" {
+resource "aws_launch_template" "faceit" {
   name_prefix   = "prod-web"
   image_id      = "ami-0b250f625dc7f2bc9"
   instance_type = "t2.micro"
@@ -93,13 +93,13 @@ resource "aws_launch_template" "backend_db" {
 # provider "docker" {}
 
 #pull the image from hub.docker.com
-resource "docker_image" "app" {
+resource "docker_image" "faceit" {
   name         = "anatolman/faceit:0.1.122"
   keep_locally = false
 }
 
 #create a container
-resource "docker_container" "app" {
+resource "docker_container" "faceit" {
   image = docker_image.faceitapp.latest
   name  = "faceit"
   ports {
