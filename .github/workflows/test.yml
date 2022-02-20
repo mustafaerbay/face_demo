@@ -47,4 +47,4 @@ jobs:
       - name: curl backend go code
         uses: wei/curl@master
         with:
-          args: http://localhost:8080/health
+          args: http://127.0.0.1:8080/health

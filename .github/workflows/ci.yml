@@ -52,7 +52,7 @@ jobs:
       -
         name: Run Postgresql container
         run: |
-         docker run --rm --name=postrgres -p 5432:5432 -e POSTGRES_PASSWORD=mysecretpassword -d postgres:13-alpine
+         docker run --rm --name=postrgres -p 5432:5432 --network host -e POSTGRES_PASSWORD=mysecretpassword -d postgres:13-alpine
       -
         name: wait Postgresql container
         run: |
@@ -60,7 +60,7 @@ jobs:
       -
         name: Test
         run: |
-          docker run -d --name=faceit -p 8080:8080 -e POSTGRESQL_HOST=postrgres  faceit:${{ env.TEST_TAG }}
+          docker run -d --name=faceit -p 8080:8080 --network host -e POSTGRESQL_HOST=postrgres faceit:${{ env.TEST_TAG }}
       -
         name: Curl backend
         run: |
