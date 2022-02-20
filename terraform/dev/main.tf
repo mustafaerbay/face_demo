@@ -106,11 +106,11 @@ resource "docker_container" "faceit" {
     internal = 8080
     external = 8080
   }
-  env {
-    POSTGRESQL_HOST     = localhost
-    POSTGRESQL_PORT     = 5432
-    POSTGRESQL_USER     = postgres
-    POSTGRESQL_PASSWORD = mysecretpassword
-    POSTGRESQL_DBNAME   = postgres
-  }
+  env = [
+    "POSTGRESQL_HOST     = localhost",
+    "POSTGRESQL_PORT     = 5432",
+    "POSTGRESQL_USER     = postgres",
+    "POSTGRESQL_PASSWORD = mysecretpassword",
+    "POSTGRESQL_DBNAME   = postgres"
+  ]
 }
