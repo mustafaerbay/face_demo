@@ -15,7 +15,7 @@ ARG VERSION
 LABEL version="$VERSION"
 MAINTAINER mustafaerbay365@gmail.com
 
-WORKDIR 
+WORKDIR /
 COPY --from=build /ops-test-app /app/ops-test-app
 RUN adduser -D erbay &&\
     chown -R erbay:erbay /app/
