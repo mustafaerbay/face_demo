@@ -5,16 +5,16 @@ terraform {
       version = "~> 2.16.0"
     }
     aws = {
-      source = "hashicorp/aws"
+      source  = "hashicorp/aws"
       version = "= 3.74.1"
+    }
   }
-  }  
 }
 
 provider "aws" {
-  region = "us-west-2"
+  region  = "us-west-2"
   profile = "default"
-#   shared_credentials_file = "/root/terraform/.aws/credentials"
+  #   shared_credentials_file = "/root/terraform/.aws/credentials"
 }
 
 resource "aws_default_vpc" "default" {}
@@ -42,19 +42,19 @@ resource "aws_security_group" "backend_db" {
     from_port   = 80
     to_port     = 80
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0" ]
+    cidr_blocks = ["0.0.0.0/0"]
   }
   ingress {
     from_port   = 443
     to_port     = 443
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0" ]
+    cidr_blocks = ["0.0.0.0/0"]
   }
   egress {
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0" ]
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   tags = {
@@ -71,7 +71,7 @@ resource "aws_elb" "backend_db" {
     instance_port     = 8080
     instance_protocol = "http"
     lb_port           = 80
-    lb_protocol       = "http" 
+    lb_protocol       = "http"
   }
   tags = {
     "Terraform" : "true"
@@ -107,10 +107,10 @@ resource "docker_container" "app" {
     external = 8080
   }
   env {
-    POSTGRESQL_HOST=localhost
-    POSTGRESQL_PORT=5432
-    POSTGRESQL_USER=postgres
-    POSTGRESQL_PASSWORD=mysecretpassword
-    POSTGRESQL_DBNAME=postgres
+    POSTGRESQL_HOST     = localhost
+    POSTGRESQL_PORT     = 5432
+    POSTGRESQL_USER     = postgres
+    POSTGRESQL_PASSWORD = mysecretpassword
+    POSTGRESQL_DBNAME   = postgres
   }
 }
