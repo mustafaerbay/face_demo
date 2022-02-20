@@ -86,6 +86,7 @@ resource "aws_launch_template" "faceit" {
   instance_type = "t2.micro"
   tags = {
     "Terraform" : "true"
+    "Prod" : "false"
   }
 }
 
