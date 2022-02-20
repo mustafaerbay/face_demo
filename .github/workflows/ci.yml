@@ -60,10 +60,12 @@ jobs:
       -
         name: Test
         run: |
-          docker run -d --name=faceit --env POSTGRESQL_HOST=127.0.0.1  faceit:${{ env.TEST_TAG }}
+          docker run -d --name=faceit -p 8080:8080 -e POSTGRESQL_HOST=127.0.0.1  faceit:${{ env.TEST_TAG }}
       -
         name: Curl backend
         run: |
+          docker ps -a
+          docker logs faceit
           curl -v http://localhost:8080/health
       -
         name: Build and push
