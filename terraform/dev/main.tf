@@ -11,6 +11,10 @@ terraform {
   }
 }
 
+provider "docker" {
+  host = "unix:///var/run/docker.sock"
+}
+
 provider "aws" {
   region  = "us-west-2"
   profile = "default"
