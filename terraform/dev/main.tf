@@ -100,7 +100,7 @@ resource "docker_image" "faceit" {
 
 #create a container
 resource "docker_container" "faceit" {
-  image = docker_image.faceitapp.latest
+  image = docker_image.faceit.latest
   name  = "faceit"
   ports {
     internal = 8080
