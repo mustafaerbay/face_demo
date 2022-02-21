@@ -11,6 +11,19 @@ env:
 jobs:
   docker:
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_PASSWORD: mysecretpassword
+          POSTGRES_USER: postgres
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
     steps:
       -
         name: Checkout
@@ -49,14 +62,14 @@ jobs:
           load: true
           tags: faceit:${{ env.TEST_TAG }}
         
-      -
-        name: Run Postgresql container
-        run: |
-         docker run --rm --name=postrgres -p 5432:5432 --network host -e POSTGRES_PASSWORD=mysecretpassword -d postgres:13-alpine
-      -
-        name: wait Postgresql container
-        run: |
-         sleep 10
+      # -
+      #   name: Run Postgresql container
+      #   run: |
+      #    docker run --rm --name=postrgres -p 5432:5432 --network host -e POSTGRES_PASSWORD=mysecretpassword -d postgres:13-alpine
+      # -
+      #   name: wait Postgresql container
+      #   run: |
+      #    sleep 10
       -
         name: Test
         run: |
