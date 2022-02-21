@@ -51,5 +51,5 @@ jobs:
         # Environment variables used by the `client.js` script to create a new PostgreSQL table.
         env:
           # The hostname used to communicate with the PostgreSQL service container
-          POSTGRESQL_HOST: postgres
+          POSTGRESQL_HOST: postgre
           # The default PostgreSQL port
