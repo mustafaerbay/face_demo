@@ -1,3 +1,10 @@
+### Environment Base workflows has to be configured, and secrets should be defined if needed.
+```
+environment: development
+environment: testing
+environment: staging
+environment: production
+```
 ### These two has been added to secrets in this project for github actions
 ```
 AWS_ACCESS_KEY_ID

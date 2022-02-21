@@ -13,6 +13,10 @@ jobs:
     # Docker Hub image that `container-job` executes in
     environment: testing
     container: golang:1.17-alpine
+    defaults:
+      run:
+        shell: bash
+        working-directory: ./test-app
 
     # Service containers to run with `container-job`
     # Service containers are Docker containers that provide a simple and portable way for you to host services that you might need to test or operate your application in a workflow. For example, your workflow might need to run integration tests that require access to a database and memory cache
@@ -48,5 +52,5 @@ jobs:
         # Environment variables used by the `client.js` script to create a new PostgreSQL table.
         env:
           # The hostname used to communicate with the PostgreSQL service container
-          POSTGRESQL_HOST: localhost
+          POSTGRESQL_HOST: postgres
           # The default PostgreSQL port

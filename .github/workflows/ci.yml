@@ -60,13 +60,16 @@ jobs:
       -
         name: Test
         run: |
-          docker run -d --name=faceit -p 8080:8080 --network host -e POSTGRESQL_HOST=postrgres faceit:${{ env.TEST_TAG }}
+          docker run -d --name=faceit -p 8080:8080 --network host -e POSTGRESQL_HOST=localhost faceit:${{ env.TEST_TAG }}
       -
         name: Curl backend
         run: |
           docker ps -a
           docker logs faceit
           curl -v http://localhost:8080/health
+
+      - name: The job has succeeded
+        if: ${{ success() }}
       -
         name: Build and push
         uses: docker/build-push-action@v2
