@@ -15,7 +15,6 @@ jobs:
     container: golang:1.17-alpine
     defaults:
       run:
-        shell: bash
         working-directory: ./test-app
 
     # Service containers to run with `container-job`
