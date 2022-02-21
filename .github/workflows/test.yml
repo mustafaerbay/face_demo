@@ -44,12 +44,16 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Connect to PostgreSQL
+        id: app
         working-directory: ./test-app
         # Runs a script that creates a PostgreSQL table, populates
         # the table with data, and then retrieves the data.
-        run: go run cmd/ops-test-app/main.go &
+        run: echo "::set-output name=app_log::$(go run cmd/ops-test-app/main.go &)"
         # Environment variables used by the `client.js` script to create a new PostgreSQL table.
         env:
           # The hostname used to communicate with the PostgreSQL service container
-          POSTGRESQL_HOST: postgre
+          POSTGRESQL_HOST: postgres
           # The default PostgreSQL port
+      - name: Check connection output
+        run: |
+          echo "${{ steps.app.outputs.app_log }}" | grep "start application"
