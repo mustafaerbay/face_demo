@@ -11,6 +11,9 @@ jobs:
     name: Build Image
     runs-on: ubuntu-latest
     environment: production
+    defaults:
+      run:
+        working-directory: ./test-app
     steps:
 
     - name: Check out code
