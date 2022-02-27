@@ -48,7 +48,7 @@ jobs:
     name: Terraform
     runs-on: ubuntu-latest
     env:
-      TF_ROOT: terraform/dev
+      TF_ROOT: terraform/prod-working
     defaults:
       run:
         working-directory: ${{ env.TF_ROOT }}
