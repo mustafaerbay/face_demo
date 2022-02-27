@@ -18,12 +18,12 @@ data "template_file" "backend" {
 
   vars = {
     docker_image_url_faceit_backend = var.docker_image_url_faceit_backend
-    region                  = var.region
-    rds_db_name             = var.rds_db_name
-    rds_username            = var.rds_username
-    rds_password            = var.rds_password
-    rds_hostname            = aws_db_instance.production.address
-    allowed_hosts           = var.allowed_hosts
+    region                          = var.region
+    rds_db_name                     = var.rds_db_name
+    rds_username                    = var.rds_username
+    rds_password                    = var.rds_password
+    rds_hostname                    = aws_db_instance.production.address
+    allowed_hosts                   = var.allowed_hosts
   }
 }
 
