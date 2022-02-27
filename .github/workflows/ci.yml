@@ -1,4 +1,4 @@
-name: ci
+name: ci to Docker Hub
 
 on:
   push:
@@ -7,6 +7,8 @@ on:
 
 env:
   TEST_TAG: test_github
+  POSTGRES_PASSWORD: mysecretpassword
+  POSTGRES_USER: postgres
 
 jobs:
   docker:
@@ -15,8 +17,8 @@ jobs:
       postgres:
         image: postgres
         env:
-          POSTGRES_PASSWORD: mysecretpassword
-          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: ${{ env.POSTGRES_PASSWORD }}
+          POSTGRES_USER: ${{ env.POSTGRES_USER }}
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -61,15 +63,6 @@ jobs:
           context: ./test-app
           load: true
           tags: faceit:${{ env.TEST_TAG }}
-        
-      # -
-      #   name: Run Postgresql container
-      #   run: |
-      #    docker run --rm --name=postrgres -p 5432:5432 --network host -e POSTGRES_PASSWORD=mysecretpassword -d postgres:13-alpine
-      # -
-      #   name: wait Postgresql container
-      #   run: |
-      #    sleep 10
       -
         name: Test
         run: |
