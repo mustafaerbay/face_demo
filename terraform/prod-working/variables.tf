@@ -58,10 +58,7 @@ variable "docker_image_url_faceit_backend" {
   description = "Docker image to run in the ECS cluster"
   default     = "843390642235.dkr.ecr.us-west-2.amazonaws.com/faceit:latest"
 }
-# variable "docker_image_url_nginx" {
-#   description = "Docker image to run in the ECS cluster"
-#   default     = "352898041397.dkr.ecr.us-west-2.amazonaws.com/nginx:latest"
-# }
+
 variable "app_count" {
   description = "Number of Docker containers to run"
   default     = 2
@@ -95,7 +92,7 @@ variable "autoscale_min" {
 }
 variable "autoscale_max" {
   description = "Maximum autoscale (number of EC2)"
-  default     = "2"
+  default     = "4"
 }
 variable "autoscale_desired" {
   description = "Desired autoscale (number of EC2)"

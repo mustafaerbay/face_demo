@@ -18,7 +18,6 @@ data "template_file" "backend" {
 
   vars = {
     docker_image_url_faceit_backend = var.docker_image_url_faceit_backend
-    # docker_image_url_nginx  = var.docker_image_url_nginx
     region                  = var.region
     rds_db_name             = var.rds_db_name
     rds_username            = var.rds_username
