@@ -29,14 +29,6 @@ jobs:
     steps:
       - attach_workspace:
           at: .
-      # - setup_remote_docker:
-      #     version: 19.03.13
-      #     docker_layer_caching: true
-      # - run:
-      #     name: install net-tools"
-      #     command: "sudo apt update ; sudo apt install net-tools"
-      #     working_directory: ./test-app
-      # build and push Docker image
       - run:
           name: "docker image build"
           command: "ls -all ; sh build.sh docker_image_build"
