@@ -1,10 +1,6 @@
 # face_demo
 ## Terraform Usage
 
-variables list
-
-|adas|asdas|
-|asdas|asds|
 
 
 
