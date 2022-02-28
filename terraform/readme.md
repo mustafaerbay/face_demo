@@ -1,16 +1,16 @@
-### Environment Base parameters has been defined for production and if needed it could be defined later.
+### Environment Base parameters have been defined for production and if needed it could be defined later.
 ```
 environment: development
 environment: testing
 environment: staging
 environment: production
 ```
-### These two key has been added to production environment secrets in this project for github actions
+### These two keys have been added to the production environment secrets in this project for github actions
 ```
 AWS_ACCESS_KEY_ID
 AWS_SECRET_ACCESS_KEY
 ```
-## For manual usage you need to export below keys or you could use aws commandline tool to configure bewlo parameters
+## For manual usage you need to export the keys below or you can use the aws CLI tool to configure below parameters
 ```
 aws configure 
 ```
@@ -23,13 +23,13 @@ $ terraform plan
 ```
 
 ## Terraform manual deployment
-Go related terraform folder for different environment (only prod-working is available)
+Go to the related terraform folder for different environment (only prod-working is available)
 terraform plan -out=prod_plan
 terraform apply prod_plan
 
 **NOTES**:
 
-Below variables could be needed for prod env. but for now all variables have default variables
+The variables below could be needed for prod environment. But for now, all variables have default values.
 
 - rds_password
 - rds_username

@@ -1,14 +1,10 @@
 # face_demo
-## Terraform Usage
 
-
-
-
-
-There are two different CI pipeline here. 
+There are two different CI pipelines here.
+## **CI**
 ### Circle CI Pipeline
 
-Below stages handled with shell [script](/test-app/build.sh) faceit image has been pushed to the docker hub with the tag of circleci build id (0.1.289)
+The stages below are handled with shell [script](/test-app/build.sh) faceit image has been pushed to the docker hub with the tag of circleci build id (0.1.289)
 - build
 - test
 - push
@@ -17,22 +13,22 @@ Below stages handled with shell [script](/test-app/build.sh) faceit image has be
 
 ![Alt text](/screenshots/docker_hub_image_list.png?raw=true "Docker Hub image tags")
 
-### Github CI Pipeline
-you could find different  pipeline approaches for different SDLC under [workflows](/.github/workflows/) folder
+### **Github CI Pipeline**
+You can find the different pipeline approaches for different SDLC under [workflows](/.github/workflows/) folder
 
 #### Purpose of actions yaml
 [ci yaml](/.github/workflows/ci.yml)
 - Build image 
-- test connections with database
-- push to docker hub with short commit id and latest_github tag
+- Test connections with database
+- Push to docker hub with short commit id and latest_github tag
 
 [push image to ECR yaml](/.github/workflows/push_image_to_ecr.yml)
-- run if ci.yaml success
-- build and push to AWS ECR
+- Run if ci.yaml success
+- Build and push to AWS ECR
 
 [Validate terraform files](/.github/workflows/validate_terraform_files.yml)
 
-supposed to be before production stage
+Terraform validate should be done before the production stage
 - terraform fmt
 - terraform init
 - terraform validate
@@ -47,3 +43,14 @@ Runs everyday at 01:30 am
 
 [Terraform deploy yaml](/.github/workflows/terraform.yml)
 used for deployment to the AWS with terraform
+
+## **CD**
+### **Github ActionsContinuous Deployment (CD)**
+[Terraform deploy yaml](/.github/workflows/terraform.yml)
+could be used for deployment 
+
+### **Terraform Deployment**
+You can follow [Terraform Readme file](/terraform/readme.md) to execute terraform deployment
+
+
+
