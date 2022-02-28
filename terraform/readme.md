@@ -1,4 +1,5 @@
 ### Environment Base parameters has been defined for production and if needed it could be defined later.
+```
 environment: development
 environment: testing
 environment: staging
@@ -26,13 +27,17 @@ Go related terraform folder for different environment (only prod-working is avai
 terraform plan -out=prod_plan
 terraform apply prod_plan
 
-**NOTES:
+**NOTES**:
+
 Below variables could be needed for prod env. but for now all variables have default variables
 
-rds_password
-rds_username
-rds_db_name
+- rds_password
+- rds_username
+- rds_db_name
 
+```
 terraform plan -var="rds_password=mysecretpassword" -var="rds_username=postgres" -var="rds_db_name=postgres" -out=prod_plan
-
+```
+```
 terraform apply prod_plan
+```
