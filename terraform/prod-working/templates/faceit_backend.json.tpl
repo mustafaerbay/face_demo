@@ -3,7 +3,7 @@
     "name": "faceit-backend",
     "image": "${docker_image_url_faceit_backend}",
     "essential": true,
-    "cpu": 10,
+    "cpu": 1024,
     "memory": 512,
     "links": [],
     "portMappings": [
@@ -40,6 +40,7 @@
         "value": "${allowed_hosts}"
       }
     ],
+    "restartPolicy": "Always",
     "mountPoints": [],
     "logConfiguration": {
       "logDriver": "awslogs",

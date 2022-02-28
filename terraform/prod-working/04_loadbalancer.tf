@@ -10,7 +10,7 @@ resource "aws_lb" "production" {
 # Target group
 resource "aws_alb_target_group" "default-target-group" {
   name     = "${var.ecs_cluster_name}-tg"
-  port     = 8080
+  port     = 80
   protocol = "HTTP"
   vpc_id   = aws_vpc.production-vpc.id
 
@@ -20,8 +20,8 @@ resource "aws_alb_target_group" "default-target-group" {
     healthy_threshold   = 5
     unhealthy_threshold = 2
     timeout             = 2
-    interval            = 5
-    matcher             = "200"
+    interval            = 30
+    matcher             = "404"
   }
 }
 
