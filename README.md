@@ -52,5 +52,8 @@ could be used for deployment
 ### **Terraform Deployment**
 You can follow [Terraform Readme file](/terraform/readme.md) to execute terraform deployment
 
+### Deployment Diagram
+![Alt text](/screenshots/latest_faceit_draw.png?raw=true "AWS diagram")
+
 
 
