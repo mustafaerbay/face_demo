@@ -55,5 +55,9 @@ jobs:
           # The hostname used to communicate with the PostgreSQL service container
           POSTGRESQL_HOST: postgres
           # The default PostgreSQL port
-      - name: Curl backend
-        run: curl -v http://localhost:8080/health | grep "UP" || exit 1
+      - name: curl health endpoint
+        uses: indiesdev/curl@v1
+        with:
+          url: http://localhost:8080/health
+          method: 'GET'
+          accept: 200.201.204
