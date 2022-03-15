@@ -3,8 +3,8 @@
     "name": "faceit-backend",
     "image": "${docker_image_url_faceit_backend}",
     "essential": true,
-    "cpu": 1024,
-    "memory": 512,
+    "cpu": 256,
+    "memory": 128,
     "links": [],
     "portMappings": [
       {
