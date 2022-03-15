@@ -67,7 +67,7 @@ func run() error {
 		}
 		logrus.Info("health endpoint is ok")
 		res.WriteHeader(http.StatusOK)
-		_, _ = fmt.Fprintf(res, "UPP\n")
+		_, _ = fmt.Fprintf(res, "UPPP\n")
 	})
 
 	// listen and serve
