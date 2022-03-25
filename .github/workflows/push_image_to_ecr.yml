@@ -52,3 +52,16 @@ jobs:
         docker tag $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG $ECR_REGISTRY/$ECR_REPOSITORY:${{ steps.vars.outputs.sha_short }}
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:${{ steps.vars.outputs.sha_short }}
+    
+
+    # - name: Setup Terraform
+    #   uses: hashicorp/setup-terraform@v1
+    #   with:
+    #     terraform_version: 0.14.10
+    # - name: Terraform Init
+    #   id: init
+    #   run: terraform init
+    #   working-directory: terraform/prod-working
+      
+    # - name: Update ecs task definition with new image tags
+    
